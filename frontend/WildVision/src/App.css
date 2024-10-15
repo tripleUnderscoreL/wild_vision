@@ -1,0 +1,22 @@
+#root {
+  text-align: center;
+}
+
+html{
+  background-image: url("../src/assets/nightBG.jpg");
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: 100vmax;
+  background-position:center top;
+  margin: 0 52px;
+}
+@media only screen and (max-width: 1500px) {
+  html{
+    background-size: 150vmax;
+  }
+}
+@media only screen and (max-width: 500px) {
+  html{
+    background-size: 200vmax;
+  }
+}

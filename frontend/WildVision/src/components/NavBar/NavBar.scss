@@ -1,0 +1,15 @@
+.navbar{
+  // margin: 30px 30px 60px;
+  display: flex;
+  justify-content: space-between;
+  gap: 5%;
+  flex-wrap: wrap;
+}
+a{
+  margin: auto;
+  color:white;
+  text-decoration: none;
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 47.52px;
+}

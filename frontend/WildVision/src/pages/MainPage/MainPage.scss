@@ -1,0 +1,41 @@
+.wv{
+  color:white;
+  font-size: 64px;
+  font-weight: 400;
+  margin: 32px 0;
+  font-family: Montserrat Alternates;
+}
+
+.discounts{
+  background: #EFEFEFBF;
+  border-radius: 30px;
+  margin: 0 0 57px;
+}
+
+.cards{
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding: 27px 0px 56px;
+  align-items: center;
+}
+
+.discount-label{
+  font-size: 64px;
+  font-weight: 400;
+}
+
+.products{
+  background: #EFEFEFBF;
+  border-radius: 30px;
+  margin: 0 0 57px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 54px;
+}
+
+.nav-bar{
+  margin-top: 30px;
+}
