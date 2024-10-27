@@ -1,0 +1,120 @@
+.wv{
+  color:white;
+  font-size: 64px;
+  font-weight: 400;
+  margin: 32px 0;
+  font-family: Montserrat Alternates;
+}
+
+.announcement{
+  margin: 29px 0;
+  padding: 29px 0;
+  background-color: #DADBDC;
+  margin-left: -60px;
+  gap: 22px;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  img{
+    height: 382px;
+    border-radius: 10px;
+  }
+}
+
+.announcement-inner{
+  display: flex;
+  flex-direction: column;
+  width: 580px;
+  margin: 0 59px 0 59px;
+  align-items: center;
+  gap: 5%;
+  h1{
+    font-size: 32px;
+    color: #CB3D3D;
+    margin: 0;
+  }
+  h2{
+    font-size: 32px;
+    margin: 0;
+  }
+  p{
+    font-size: 24px;
+  }
+  button{
+    padding: 0px 85px ;
+    border-color: #CB3D3D;
+    background-color: #DADBDC;
+    border-radius: 100px;
+    border-width: 4px;
+    border-style: solid;
+    //text-align: center;
+    font-size: 32px;
+  }
+}
+
+.link-to-products{
+  font-size: 32px;
+  color: #696969;
+  background-color: #DDDEDB;
+  padding: 8px 36px;
+  border-radius: 30px;
+  margin-bottom: 50px;
+}
+
+.self-promotion{
+  display: flex;
+  flex-direction: column;
+  section{
+    img{
+      width: 39px;
+      height: 39px;
+    }
+    gap: 10px;
+    width: 66%;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+    p{
+      margin: 0;
+      font-size: 32px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+  }
+}
+
+.right-promotion{
+  margin-left: 34%;
+}
+
+.faq{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  section{
+    display: flex;
+    flex-direction: row;
+    width: 1180px;
+    gap: 10px;
+    margin: 25px 0;
+    :nth-child(1){
+      width: 300px;
+      height: fit-content;
+      border-radius: 30px 0 0 30px;
+    }
+    :nth-child(2){
+      width: 820px;
+      border-radius: 0 30px 30px 30px;
+    }
+    p{
+      font-size: 20px;
+      color: #696969;
+      background-color: #EFEFEF;
+      padding: 10px 30px;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
