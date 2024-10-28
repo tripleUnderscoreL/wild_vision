@@ -1,1 +1,5 @@
 venv/
+media
+.flake8
+db.sqlite3
+__pycache__
