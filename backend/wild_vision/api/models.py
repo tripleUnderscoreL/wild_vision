@@ -1,5 +1,6 @@
 # flake8: noqa 
 from django.db import models  # type: ignore
+from django.contrib.auth.models import User, AbstractUser  # type: ignore
 
 
 def product_image_path(instance, filename):
@@ -39,3 +40,7 @@ class Product(models.Model):
     class Meta():
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class CustomUser(AbstractUser):
+    phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="Номер телефона")
