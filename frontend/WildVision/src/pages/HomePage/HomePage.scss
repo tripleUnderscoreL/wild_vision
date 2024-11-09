@@ -1,22 +1,16 @@
-.wv{
-  color:white;
-  font-size: 64px;
-  font-weight: 400;
-  margin: 32px 0;
-  font-family: Montserrat Alternates;
-}
+@import "../../styles.scss";
 
 .announcement{
   margin: 29px 0;
   padding: 29px 0;
   background-color: #DADBDC;
-  margin-left: -60px;
   gap: 22px;
-  width: 100vw;
+  width: 100%;
   display: flex;
   flex-direction: row;
+  align-items: center;
   img{
-    height: 382px;
+    height: 400px;
     border-radius: 10px;
   }
 }
@@ -47,7 +41,6 @@
     border-radius: 100px;
     border-width: 4px;
     border-style: solid;
-    //text-align: center;
     font-size: 32px;
   }
 }
@@ -64,6 +57,7 @@
 .self-promotion{
   display: flex;
   flex-direction: column;
+  @extend %container-1180;
   section{
     img{
       width: 39px;

@@ -1,0 +1,74 @@
+@import "../../styles.scss";
+
+.basket{
+  background: #DADBDC;
+  margin: 0 0 57px;
+  width: 100vw;
+  p{
+    color: #696969;
+  }
+}
+
+.items{
+  @extend %container-1180;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 30px;
+  padding: 27px 0px 56px;
+  align-items: start;
+}
+
+.basket-label{
+  font-size: 32px;
+  padding: 20px 0;
+}
+
+.basket-info{
+  width: 376px;
+  p{
+    font-size: 20px;
+  }
+  button{
+    background: #9BA161;
+    font-size: 24px;
+    width:100%;
+    border-radius: 30px;
+    color:  #EFEFEF;
+  }
+}
+
+.basket-product{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  section{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    font-size: 32px;
+    background-color: #EFEFEF;
+    height: fit-content;
+    padding: 0 20px;
+    border-radius: 30px;
+    p{
+      margin: 0;
+    }
+  }
+}
+
+.counter{
+  align-items: center;
+  button{
+    background-color: $wv-white;
+    padding: 0;
+    margin: 0 10px;
+    color: $wv-dark-gray;
+    &:not([disabled]):active {
+      box-shadow: none;
+    }
+    &:not([disabled]):hover {
+      opacity: 0.8;
+    }
+  }
+}

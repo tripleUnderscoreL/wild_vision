@@ -1,0 +1,22 @@
+$wv-white: #EFEFEF;
+$wv-light-gray: #DADBDC;
+$wv-dark-gray: #696969;
+$wv-green: #9BA161;
+
+%container-1180{
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+%main-logo{
+  color:white;
+  font-size: 64px;
+  font-weight: 400;
+  margin-top: 32px;
+  margin-bottom: 32px;
+  font-family: Montserrat Alternates;
+  text-align: center;
+}
+
+

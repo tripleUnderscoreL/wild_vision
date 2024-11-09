@@ -4,14 +4,15 @@ import NavBar from "../../components/NavBar/NavBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import SmallProductSlider from "../../components/SmallProductSlider/SmallProductSlider";
 import Footer from "../../components/Footer/Footer";
-interface Props {}
+import Logo from "../../components/Logo/Logo";
 
-const HomePage = (props: Props) => {
+
+
+const HomePage = () => {
   return(
     <>
       <NavBar></NavBar>
-
-      <p className="wv">WildVision</p>
+      <Logo></Logo>
 
       <SearchBar></SearchBar>  
 

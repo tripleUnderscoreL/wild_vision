@@ -1,5 +1,6 @@
 import React from "react";
 import './NavBar.scss';
+import ModalSign from "../Modal/ModalSignIn/ModalSign";
 interface Props {}
 
 const NavBar = (props: Props) => {
@@ -10,7 +11,7 @@ const NavBar = (props: Props) => {
       <a href="/guarantees">Гарантии</a>
       <a href="/">Доставка</a>
       <a href="/">Контакты</a>
-      <a href="/">Регистрация/Вход</a>
+      <ModalSign></ModalSign>
     </div>
   ) 
 }

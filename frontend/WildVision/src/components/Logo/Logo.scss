@@ -1,0 +1,6 @@
+@import "../../styles.scss";
+
+.wv{
+  @extend %main-logo;
+  @extend %container-1180;
+}

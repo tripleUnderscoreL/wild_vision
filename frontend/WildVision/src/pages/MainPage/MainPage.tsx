@@ -5,29 +5,56 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import ProductCard from "../../components/ProductCard/ProducrCard";
 import Footer from "../../components/Footer/Footer";
 import SmallProductSlider from "../../components/SmallProductSlider/SmallProductSlider";
-interface Props {}
+import Logo from "../../components/Logo/Logo";
+import { Product } from "../../types";
+interface Props {products: Product[]}
+
+
+
 
 const MainPage = (props: Props) => {
+  const products: Product[] = [
+    {img: "../../src/assets/shopping-bag.png", name: "Сумка", price: "1000 руб"},
+  ]
+  console.log((props));
   return (
     <>
       <div className="nav-bar">
         <NavBar></NavBar>
       </div>
 
-      <p className="wv">WildVision</p>
+      <Logo></Logo>
       <SearchBar></SearchBar>      
       
       <SmallProductSlider> </SmallProductSlider>
-
       <div className="products">
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
-        <ProductCard></ProductCard>
+        <div className="product-cards">
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+          <ProductCard img = {products[0].img} name = {products[0].name} price = {products[0].price}></ProductCard>
+        </div>
       </div>
       <Footer></Footer>
     </>

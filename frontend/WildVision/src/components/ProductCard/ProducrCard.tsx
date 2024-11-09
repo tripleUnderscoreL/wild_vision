@@ -1,18 +1,23 @@
 import React from "react";
 import './ProductCard.scss';
-interface Props {}
+import { Product } from "../../types";
 
-const ProductCard = (props: Props) => {
+const ProductCard = (product: Product) => {
   return(
     <>
       <div className="product-card">
-        <svg xmlns="http://www.w3.org/2000/svg" width="252" height="236" viewBox="0 0 252 236" fill="none">
-        <path d="M83.8714 88.6493V49.3831C83.8714 27.697 102.694 10.1169 125.807 10.1169C148.968 10.1169 167.743 27.7411 167.743 49.3831V88.6493M41.9357 69.0162H209.678V226.081H41.9357V69.0162Z" stroke="#696969" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p className="product-name">Товар 1</p>
+        <img src={product.img}></img>
+        <p className="product-name">{product.name}</p>
+        <p className="product-price"> {product.price}</p>
       </div>
     </>
   ) 
+}
+
+ProductCard.defaultProps = {
+  img: "../../src/assets/shopping-bag.png",
+  name: "Сумка",
+  price: "1000 руб"
 }
 
 export default ProductCard;

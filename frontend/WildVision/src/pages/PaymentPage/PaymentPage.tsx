@@ -3,13 +3,14 @@ import './PaymentPage.scss';
 import NavBar from "../../components/NavBar/NavBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import Footer from "../../components/Footer/Footer";
+import Logo from "../../components/Logo/Logo";
 interface Props {}
 
 const PaymentPage = (props: Props) => {
   return(
     <>
       <NavBar></NavBar>
-      <p className="wv">WildVision</p>
+      <Logo></Logo>
       <SearchBar></SearchBar>
       <div className="payment-inner">
         <h1>Доставка и оплата</h1>
