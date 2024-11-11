@@ -1,6 +1,6 @@
 # flake8: noqa
 from rest_framework import serializers  # type: ignore
-from .models import Product, Category, CustomUser
+from .models import Product, Category, CustomUser, CartItem
 from django.contrib.auth.password_validation import validate_password  # type: ignore
 from django.core.exceptions import ValidationError  # type: ignore
 
@@ -36,3 +36,9 @@ class UserSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
         return user
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ['product', 'quantity']
