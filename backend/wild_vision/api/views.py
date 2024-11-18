@@ -1,8 +1,10 @@
 # flake8: noqa
+
 from django.shortcuts import render  # type: ignore
-from rest_framework import generics  # type: ignore
-from .models import Product, Cart, CartItem
-from .serializers import ProductSerializer, CartItemSerializer
+from rest_framework import generics, permissions  # type: ignore
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView  # type: ignore
+from .models import Product, Cart, CartItem, ProductReview, StoreReview
+from .serializers import ProductSerializer, CartItemSerializer, ProductReviewSerializer, StoreReviewSerializer
 from django.contrib.sessions.models import Session  # type: ignore
 from rest_framework.views import APIView  # type: ignore
 from rest_framework.response import Response  # type: ignore
@@ -55,3 +57,42 @@ class CurrentCartView(APIView):
             "cart_id": cart.id,
             "items": serializer.data
         }, status=status.HTTP_200_OK)
+
+
+class ProductReviewListCreateView(generics.ListCreateAPIView):
+    queryset = ProductReview.objects.all()
+    serializer_class = ProductReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class ProductReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = ProductReview.objects.all()
+    serializer_class = ProductReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return ProductReview.objects.filter(user=self.request.user)
+        return super().get_queryset()
+
+
+class StoreReviewListCreateView(ListCreateAPIView):
+    queryset = StoreReview.objects.all()
+    serializer_class = StoreReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+
+class StoreReviewDetailView(RetrieveUpdateDestroyAPIView):
+    queryset = StoreReview.objects.all()
+    serializer_class = StoreReviewSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def get_queryset(self):
+        if self.request.method in ['PUT', 'PATCH', 'DELETE']:
+            return StoreReview.objects.filter(user=self.request.user)
+        return super().get_queryset()
