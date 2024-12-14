@@ -5,10 +5,29 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import SmallProductSlider from "../../components/SmallProductSlider/SmallProductSlider";
 import Footer from "../../components/Footer/Footer";
 import Logo from "../../components/Logo/Logo";
+import { Product } from "../../types";
 
+const sales: Product[] = [
+  {img:"../../src/assets/surokhaha.jpeg", name: "Сурок", price: "1800 руб"},
+  {img:"../../src/assets/lionhaha.png", name: "Лева", price: "7000 руб"},
+  {img:"../../src/assets/mountainsBG.jpg", name: "Гора", price: "бесплатно"},
+  {img:"../../src/assets/lionhaha2.jpeg", name: "Лёня", price: "9900 руб"},
+  {img:"../../src/assets/surokhaha.jpeg", name: "Сумка", price: "1000 руб"},
+  {img:"../../src/assets/mountainsBG.jpg", name: "Гора", price: "бесплатно"},
+  {img:"../../src/assets/lionhaha.png", name: "Лева", price: "10000 руб"},
+]
+
+const categories: Product[] = [
+  {img:"../../src/assets/shopping-bag.png", name: "Категория 1", price: ""},
+  {img:"../../src/assets/shopping-bag.png", name: "Категория 2", price: ""},
+  {img:"../../src/assets/shopping-bag.png", name: "Категория 3", price: ""},
+  {img:"../../src/assets/shopping-bag.png", name: "Категория 4", price: ""},
+]
 
 
 const HomePage = () => {
+
+  
   return(
     <>
       <NavBar></NavBar>
@@ -21,14 +40,14 @@ const HomePage = () => {
         <div className="announcement-inner">
           <h1>СКИДКА до 30%</h1>
           <h2>на походное снаряжение</h2>
-          <button>Ассортимент</button>
+          <a href="/catalog">Ассортимент</a>
           <p>Мы заботимся о состоянии, защите природы и высоком качестве предоставляемой продукции</p>
         </div>
         <img src="../../src/assets/lionhaha2.jpeg"></img>
         <img src="../../src/assets/surokhaha.jpeg"></img>
       </div>
 
-      <SmallProductSlider></SmallProductSlider>
+      <SmallProductSlider products={sales}></SmallProductSlider>
 
       <a href="/catalog" className="link-to-products">Перейти в каталог</a>
 
@@ -78,7 +97,7 @@ const HomePage = () => {
         </section>
       </div>
 
-      <SmallProductSlider></SmallProductSlider>
+      <SmallProductSlider products={categories} name="Популярные категории"></SmallProductSlider>
 
       <a href="/catalog" className="link-to-products">Перейти в каталог</a>
       <Footer></Footer>

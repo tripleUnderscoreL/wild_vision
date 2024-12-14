@@ -1,0 +1,47 @@
+@import "styles.scss";
+
+#root {
+  text-align: center;
+}
+
+@supports selector(::-webkit-scrollbar) {
+  html::-webkit-scrollbar {
+    background: $wv-light-gray;
+    border: solid 1px $wv-dark-gray;
+  }
+  html::-webkit-scrollbar-thumb {
+    background: linear-gradient(#534b3d, #303b41, #313a33);
+    background-position: center;
+    background-clip: border-box;
+    background-size: 110vw 100vh;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    border-radius: 1000px;
+    border: solid 0 1px $wv-dark-gray;
+  }
+}
+
+body{
+  margin: 0;
+  overflow-x: hidden;
+  
+}
+
+html{
+  background-image: url("./assets/nightBG.jpg");
+  background-repeat: no-repeat;
+  background-attachment:fixed;
+  background-size: 100vmax;
+  background-position:center top;
+  /* margin: 0 52px; */
+}
+@media only screen and (max-width: 1500px) {
+  html{
+    background-size: 150vmax;
+  }
+}
+@media only screen and (max-width: 500px) {
+  html{
+    background-size: 200vmax;
+  }
+}

@@ -3,6 +3,13 @@
   opacity: 0px;
   background-color: white;
   padding: 38px 47px 17px;
+  img{
+    width: 188px;
+    height: 175px;
+    object-fit: cover;
+    object-position:center;
+    border-radius: 10px;
+  }
   p{
     margin: 10px 0;
   }

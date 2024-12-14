@@ -7,10 +7,9 @@ const NavBar = (props: Props) => {
   return(
     <div className="navbar">
       <a href="/reviews">Отзывы</a>
-      <a href="/payment">Оплата</a>
+      <a href="/payment">Доставка и оплата</a>
       <a href="/guarantees">Гарантии</a>
-      <a href="/">Доставка</a>
-      <a href="/">Контакты</a>
+      <a href="/faq">FAQ</a>
       <ModalSign></ModalSign>
     </div>
   ) 

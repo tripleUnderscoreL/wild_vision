@@ -1,1 +1,18 @@
 @import "../../styles.scss";
+
+.reviews{
+  background: #DADBDC;
+  margin: 0 0 57px;
+  margin-top: 5%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding-bottom: 80px;
+  label{
+    font-size: 32px;
+    margin: 5px 0;
+  }
+  
+}

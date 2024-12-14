@@ -1,3 +1,4 @@
+import { useState } from "react"
 import Footer from "../../components/Footer/Footer"
 import Logo from "../../components/Logo/Logo"
 import NavBar from "../../components/NavBar/NavBar"
@@ -5,15 +6,23 @@ import SearchBar from "../../components/SearchBar/SearchBar"
 import "./ProfilePage.scss"
 
 const ProfilePage = (props: Props) => {
+
+  const [file, setFile] = useState(null);
+  function handleImgChange(e) {
+    console.log(e.target.files);
+    document.getElementById("profile-img").classList.add('profile-photo-uploaded');
+    setFile(URL.createObjectURL(e.target.files[0]));
+}
+
   return (
     <>
       <NavBar></NavBar>
       <Logo></Logo>
       <SearchBar></SearchBar>
       <div className="profile">
-        <div className="profile-photo">
-          <input type="file" className="profile-photo-input"/>
-          <img className="profile-photo-img" src="../../src/assets/profile-photo.png"></img>
+        <div className="profile-photo" >
+          <input id="profile-img-input" onChange={handleImgChange} type="file"  className="profile-photo-input"/>
+          <img id="profile-img" className="profile-photo-img" src={file === null ? "../../src/assets/profile-photo.png" : file}></img>
         </div>
         <button className="profile-edit">
           <img src="../../src/assets/edit.png"></img>

@@ -5,6 +5,7 @@
   justify-content: center;
   gap: 10px;
   @extend %container-1180;
+  
 }
 
 button{
@@ -15,6 +16,7 @@ button{
   font-size: 32px;
   align-items: center;
   background-color: white;
+  color: $wv-dark-gray;
   &:not([disabled]):active {
     box-shadow: inset 0px 0px 10px 1px rgba(0, 0, 0, 0.625);
   }
@@ -28,6 +30,7 @@ input{
   height: 58px;
   width: 100%;
   border: none;
+  color: $wv-dark-gray;
   &:focus{
     outline: none;
   }
@@ -46,6 +49,7 @@ input{
   // padding: 0 30px 0 0;
   border-radius: 0 100px 100px 0;
   width:100%;
+  color: $wv-dark-gray;
 }
 
 .search-button{
