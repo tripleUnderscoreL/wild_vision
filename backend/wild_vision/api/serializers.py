@@ -1,8 +1,8 @@
 # flake8: noqa
-from rest_framework import serializers  # type: ignore
+from rest_framework import serializers
 from .models import Product, Category, CustomUser, CartItem, ProductReview, BaseReview, StoreReview
-from django.contrib.auth.password_validation import validate_password  # type: ignore
-from django.core.exceptions import ValidationError  # type: ignore
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -63,3 +63,8 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ['product', 'quantity']
+
+    def validate_quantity(self, value):
+        if value <= 0:
+            raise serializers.ValidationError("количество должно быть больше одного")
+        return value

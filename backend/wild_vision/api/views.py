@@ -1,14 +1,12 @@
 # flake8: noqa
 
-from django.shortcuts import render  # type: ignore
-from rest_framework import generics, permissions  # type: ignore
-from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView  # type: ignore
+from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import generics, permissions
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Product, Cart, CartItem, ProductReview, StoreReview
 from .serializers import ProductSerializer, CartItemSerializer, ProductReviewSerializer, StoreReviewSerializer
-from django.contrib.sessions.models import Session  # type: ignore
-from rest_framework.views import APIView  # type: ignore
-from rest_framework.response import Response  # type: ignore
-from rest_framework import status  # type: ignore
 
 
 class ProductListView(generics.ListAPIView):
@@ -22,35 +20,62 @@ class ProductDetailView(generics.RetrieveAPIView):
 
 
 class AddToCartView(APIView):
-    def post(self, request, product_id):
-        session_key = request.session.session_key or request.session.create()
-        
+    def post(self, request):
+        product_id = request.data.get('product_id')
+        quantity = int(request.data.get('quantity', 1)) 
+        if not product_id or quantity <= 0:
+            return Response({"error": "необходимо указать правильный id товара и его количество"}, status=status.HTTP_400_BAD_REQUEST)
+
         if request.user.is_authenticated:
             cart, created = Cart.objects.get_or_create(user=request.user)
             if cart.session_key:
                 cart.session_key = None
                 cart.save()
-                
         else:
+            session_key = request.session.session_key or request.session.create()
             cart, created = Cart.objects.get_or_create(session_key=session_key, user=None)
 
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product_id=product_id)
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return Response({"error": "товар не найден"}, status=status.HTTP_404_NOT_FOUND)
+
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
         if not created:
-            cart_item.quantity += 1
+            cart_item.quantity += quantity 
+        else:
+            cart_item.quantity = quantity
+        
         cart_item.save()
 
-        return Response({"message": "Item added to cart"}, status=status.HTTP_200_OK)
+        return Response({
+            "message": f"{product.name} добавлен в корзину",
+            "cart_id": cart.id,
+            "product": product.name,
+            "quantity": cart_item.quantity
+        }, status=status.HTTP_200_OK)
 
 
 class CurrentCartView(APIView):
     def get(self, request):
         if request.user.is_authenticated:
-            cart, created = Cart.objects.get_or_create(user=request.user)
+            cart = Cart.objects.filter(user=request.user).first()
+            if not cart:
+                session_key = request.session.session_key
+                if session_key:
+                    cart = Cart.objects.filter(session_key=session_key, user=None).first()
+                    if cart:
+                        cart.user = request.user
+                        cart.session_key = None
+                        cart.save()
+                if not cart:
+                    cart = Cart.objects.create(user=request.user)
         else:
             session_key = request.session.session_key or request.session.create()
             cart, created = Cart.objects.get_or_create(session_key=session_key, user=None)
 
-        cart_items = CartItem.objects.filter(cart=cart)
+        cart_items = cart.items.all()
         serializer = CartItemSerializer(cart_items, many=True)
 
         return Response({

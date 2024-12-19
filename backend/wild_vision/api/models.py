@@ -8,8 +8,7 @@ def product_image_path(instance, filename):
     return f'product_{instance.id}/{filename}'
 
 def product_review_image_path(instance, filename):
-    return f'product_{instance.id}/reviews/{filename}'
-
+    return f'product_{instance.product.id}/reviews/{filename}'
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -87,7 +86,6 @@ class BaseReview(models.Model):
         abstract = True
 
 
-
 class ProductReview(BaseReview):
     product = models.ForeignKey('Product', related_name='reviews', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=product_review_image_path, null=True, blank=True)
@@ -100,7 +98,7 @@ class ProductReview(BaseReview):
             self.image = temp_image
 
         super().save(*args, **kwargs)
-    
+
     class Meta:
         unique_together = ('product', 'user')
         ordering = ['-created_at']
@@ -109,7 +107,7 @@ class ProductReview(BaseReview):
 
     def __str__(self):
         return f"Отзыв на \"{self.product.name}\" № {self.id}"
-    
+
 
 class StoreReview(BaseReview):
     rating = None
