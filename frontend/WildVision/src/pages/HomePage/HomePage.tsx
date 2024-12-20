@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './HomePage.scss';
 import NavBar from "../../components/NavBar/NavBar";
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -6,28 +6,24 @@ import SmallProductSlider from "../../components/SmallProductSlider/SmallProduct
 import Footer from "../../components/Footer/Footer";
 import Logo from "../../components/Logo/Logo";
 import { Product } from "../../types";
-
-const sales: Product[] = [
-  {img:"../../src/assets/surokhaha.jpeg", name: "Сурок", price: "1800 руб"},
-  {img:"../../src/assets/lionhaha.png", name: "Лева", price: "7000 руб"},
-  {img:"../../src/assets/mountainsBG.jpg", name: "Гора", price: "бесплатно"},
-  {img:"../../src/assets/lionhaha2.jpeg", name: "Лёня", price: "9900 руб"},
-  {img:"../../src/assets/surokhaha.jpeg", name: "Сумка", price: "1000 руб"},
-  {img:"../../src/assets/mountainsBG.jpg", name: "Гора", price: "бесплатно"},
-  {img:"../../src/assets/lionhaha.png", name: "Лева", price: "10000 руб"},
-]
+import { fetchProducts } from "../../api";
 
 const categories: Product[] = [
-  {img:"../../src/assets/shopping-bag.png", name: "Категория 1", price: ""},
-  {img:"../../src/assets/shopping-bag.png", name: "Категория 2", price: ""},
-  {img:"../../src/assets/shopping-bag.png", name: "Категория 3", price: ""},
-  {img:"../../src/assets/shopping-bag.png", name: "Категория 4", price: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Категория 1", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Категория 2", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Категория 3", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Категория 4", price: "", description: "", category: ""},
 ]
 
 
 const HomePage = () => {
-
   
+  const [products, setProducts] = useState<Product[]>([]);
+    useEffect(() => {
+      fetchProducts().then((data) => setProducts(data));
+      console.log(products);
+    }, []);
+
   return(
     <>
       <NavBar></NavBar>
@@ -47,7 +43,7 @@ const HomePage = () => {
         <img src="../../src/assets/surokhaha.jpeg"></img>
       </div>
 
-      <SmallProductSlider products={sales}></SmallProductSlider>
+      <SmallProductSlider products={products}></SmallProductSlider>
 
       <a href="/catalog" className="link-to-products">Перейти в каталог</a>
 

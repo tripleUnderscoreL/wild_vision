@@ -2,22 +2,29 @@
 
 #root {
   text-align: center;
+  ::selection {
+    background: rgba(255, 0, 68, 0.252);
+  }
 }
+
+// TO REMOVE CUSTOM SCROLLBAR COMMENT THE FOLLOWING CODE
 
 @supports selector(::-webkit-scrollbar) {
   html::-webkit-scrollbar {
-    background: $wv-light-gray;
-    border: solid 1px $wv-dark-gray;
+    // TO DISABLE COMMENT THIS LINE
+    background: transparent; 
+    // TO DISABLE COMMENT THIS LINE
   }
   html::-webkit-scrollbar-thumb {
-    background: linear-gradient(#534b3d, #303b41, #313a33);
+    background: linear-gradient(#535353, #1f1f1f, #686868);
     background-position: center;
     background-clip: border-box;
     background-size: 110vw 100vh;
     background-repeat: no-repeat;
     background-attachment: fixed;
-    border-radius: 1000px;
-    border: solid 0 1px $wv-dark-gray;
+  }
+  html::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1; 
   }
 }
 

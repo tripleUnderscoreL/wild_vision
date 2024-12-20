@@ -1,33 +1,37 @@
 import "./ReviewCard.scss";
+import { Review } from "../../types";
 
-const ReviewCard = () => {
-
+const ReviewCard = ( review: Review) => {
   return (
     <>
       <div className="review-card">
         <section className="review-info">
-          <p>Екатерина</p>
-          <p>15.10.25</p>
+          <p>{review.name}</p>
+          <p>{review.date}</p>
           <img src="../../src/assets/5star.png"></img>
         </section>
-        <p>Всем довольна! Еще вернусь.</p>
+        <p>{review.review}</p>
         <section className="review-pros">
           <p>Достоинства:</p>
-          <p>Все великолепно!</p>
+          <p>{review.pros}</p>
         </section>
         <section className="review-cons">
           <p>Недостатки:</p>
-          <p>Не обнаружила</p>
+          <p>{review.cons}</p>
         </section>
       </div>
       <div className="review-gallery">
-        <img src="../../src/assets/lionhaha.png" alt="1" />
-        <img src="../../src/assets/lionhaha2.jpeg" alt="2" />
-        <button><img src="../../src/assets/right-arrow.png"></img></button>
+        {review.images.length > 0 ? review.images.map(e => (<img src={e}></img>)): null}
+        { review.images.length > 0  ? 
+          <button><img src="../../src/assets/right-arrow.png"></img></button>
+          : null
+        }
+        
       </div>  
     </>
     
   )
 }
+ReviewCard.defaultProps = { name: "", date: "", rating: 0, review: "", pros: "", cons: "", images: []}
 
 export default ReviewCard; 

@@ -32,6 +32,8 @@
     gap: 30px;
     justify-content: start;
     width: 100%;
+    max-width: 1240px;
+    overflow-y: hidden;
     img{
       
     }
@@ -70,12 +72,11 @@
   }
   label{
     text-align: center;
-    width: 144px;
     font-size: 24px;
     color: $wv-dark-gray;
     margin: 0;
     line-height: 26px;
-    padding: 46px 0;
+    padding: 46px 36px;
     background-color: $wv-light-gray;
     border-radius: 20px;
     cursor: pointer;
@@ -121,42 +122,6 @@
   }
 }
 
-
-
-
-
-
-
-
-
-.custom__form input {
-  opacity: 0;
-  height: 0;
-}
-
-.custom__image-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.custom__image-container label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 150%;
-  cursor: pointer;
-  width: 100px;
-  height: 100px;
-  border: solid 1px black;
-  border-radius: 5px;
-  object-fit: cover;
-}
-
-.custom__image-container img {
-  width: 100px;
-  height: 100px;
-  border: solid 1px black;
-  border-radius: 5px;
-  object-fit: cover;
+.error{
+  color: $wv-red;
 }

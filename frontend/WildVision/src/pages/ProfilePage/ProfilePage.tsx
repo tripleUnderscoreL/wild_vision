@@ -4,6 +4,7 @@ import Logo from "../../components/Logo/Logo"
 import NavBar from "../../components/NavBar/NavBar"
 import SearchBar from "../../components/SearchBar/SearchBar"
 import "./ProfilePage.scss"
+import { getToken, getUser } from "../../api"
 
 const ProfilePage = (props: Props) => {
 
@@ -12,7 +13,9 @@ const ProfilePage = (props: Props) => {
     console.log(e.target.files);
     document.getElementById("profile-img").classList.add('profile-photo-uploaded');
     setFile(URL.createObjectURL(e.target.files[0]));
-}
+  }
+
+  console.log(getUser(getToken()));
 
   return (
     <>

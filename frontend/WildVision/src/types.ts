@@ -1,7 +1,21 @@
 interface Product {
-  img: string,
+  id: string,
+  image: string,
    name: string,
-    price: string
+    price: string,
+    description: string,
+    category: string
+    reviews: []
 }
 
-export type {Product}
+interface Review {
+  name: string,
+  date: string,
+  rating: number,
+  review: string,
+  pros: string,
+  cons: string,
+  images: string[]
+}
+
+export type {Product, Review}

@@ -5,8 +5,12 @@ import { Product } from "../../types";
 const ProductCard = (product: Product) => {
   return(
     <>
-      <div className="product-card">
-        <img src={product.img}></img>
+      <div className="product-card" onClick={() => 
+      
+      {
+        window.location.href = `/product/${product.id}`
+      }}>
+        <img src={product.image}></img>
         <p className="product-name">{product.name}</p>
         <p className="product-price"> {product.price}</p>
       </div>

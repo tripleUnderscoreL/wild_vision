@@ -25,7 +25,7 @@ const SmallProductSlider = ({ products, name }: AppProps) => {
           <section id="scrollable-section" className="gallery-cards">
             
             {products.map(e => (
-              <ProductCard img={e.img} name={e.name} price={e.price}></ProductCard>
+              <ProductCard id={e.id} image={e.image} name={e.name} price={e.price} description={e.description} category={e.category} reviews={e.reviews}></ProductCard>
             ))}
 
           </section>
