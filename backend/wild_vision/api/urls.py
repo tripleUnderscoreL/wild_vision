@@ -8,7 +8,9 @@ from .views import (
     ProductReviewListCreateView, 
     ProductReviewDetailView, 
     StoreReviewDetailView, 
-    StoreReviewListCreateView
+    StoreReviewListCreateView,
+    ProductListByCategoryView,
+    CategoryListView,
 )
 from django.conf import settings
 from django.conf.urls.static import static
@@ -22,7 +24,10 @@ urlpatterns = [
     path('product-reviews/<int:pk>/', ProductReviewDetailView.as_view(), name='product-review-detail'),
     path('store-reviews/', StoreReviewListCreateView.as_view(), name='store-review-list-create'),
     path('store-reviews/<int:pk>/', StoreReviewDetailView.as_view(), name='store-review-detail'),
+    path('products/category/<int:category_id>/', ProductListByCategoryView.as_view(), name='product-list-by-category'),
+    path('categories/', CategoryListView.as_view(), name='category-list'),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    

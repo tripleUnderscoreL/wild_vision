@@ -5,8 +5,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import generics, permissions
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .models import Product, Cart, CartItem, ProductReview, StoreReview
-from .serializers import ProductSerializer, CartItemSerializer, ProductReviewSerializer, StoreReviewSerializer
+from .models import Category, Product, Cart, CartItem, ProductReview, StoreReview
+from .serializers import ProductSerializer, CartItemSerializer, ProductReviewSerializer, StoreReviewSerializer, CategorySerializer
 
 
 class ProductListView(generics.ListAPIView):
@@ -77,10 +77,11 @@ class CurrentCartView(APIView):
 
         cart_items = cart.items.all()
         serializer = CartItemSerializer(cart_items, many=True)
-
+        total = sum(item.product.price * item.quantity for item in cart_items)
         return Response({
             "cart_id": cart.id,
-            "items": serializer.data
+            "items": serializer.data,
+            "total": total
         }, status=status.HTTP_200_OK)
 
 
@@ -91,6 +92,7 @@ class ProductReviewListCreateView(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
 
 class ProductReviewDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = ProductReview.objects.all()
@@ -121,3 +123,16 @@ class StoreReviewDetailView(RetrieveUpdateDestroyAPIView):
         if self.request.method in ['PUT', 'PATCH', 'DELETE']:
             return StoreReview.objects.filter(user=self.request.user)
         return super().get_queryset()
+    
+
+class ProductListByCategoryView(generics.ListAPIView):
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        return Product.objects.filter(category_id=category_id)
+
+
+class CategoryListView(generics.ListAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
