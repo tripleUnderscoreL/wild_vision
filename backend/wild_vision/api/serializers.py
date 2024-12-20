@@ -3,11 +3,12 @@ from rest_framework import serializers
 from .models import Product, Category, CustomUser, CartItem, ProductReview, BaseReview, StoreReview
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
+from django.db.models import Avg
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name']
+        fields = ['id', 'name', 'description', 'image']
 
 
 class BaseReviewSerializer(serializers.ModelSerializer):
@@ -32,17 +33,24 @@ class StoreReviewSerializer(BaseReviewSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     reviews = ProductReviewSerializer(many=True, read_only=True)
-
+    rating = serializers.SerializerMethodField()
     class Meta:
         model = Product
-        fields = ['id', 'category', 'name', 'description', 'price', 'image', 'reviews']
+        fields = ['id', 'category', 'name', 'description', 'price', 'image', 'reviews', 'rating']
+
+    def get_rating(self, obj):
+        reviews = ProductReview.objects.filter(product=obj)
+        if reviews.exists():
+            avg_rating = reviews.aggregate(Avg('rating'))['rating__avg']
+            return round(avg_rating, 2)
+        return 0
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ["username", "password", "email", "phone_number"]
-        extra_kwargs = {"password": {"write_only": True}}
+        fields = ['username', 'password', 'email', 'phone_number', 'first_name', 'last_name', 'address']
+        extra_kwargs = {'password': {'write_only': True}}
 
     def validate_password(self, value):
         try:
@@ -66,5 +74,6 @@ class CartItemSerializer(serializers.ModelSerializer):
 
     def validate_quantity(self, value):
         if value <= 0:
-            raise serializers.ValidationError("количество должно быть больше одного")
+            raise serializers.ValidationError('количество должно быть больше одного')
         return value
+    

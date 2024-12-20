@@ -7,11 +7,25 @@ from django.contrib.auth.models import User, AbstractUser  # type: ignore
 def product_image_path(instance, filename):
     return f'product_{instance.id}/{filename}'
 
+def category_image_path(instance, filename):
+    return f'category_{instance.id}/{filename}'
+
 def product_review_image_path(instance, filename):
     return f'product_{instance.product.id}/reviews/{filename}'
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
+    description = models.TextField(blank=True, null=True, verbose_name='Описание')
+    image = models.ImageField(upload_to='category_images/', blank=True, null=True, verbose_name='Изображение')
+    
+    def save(self, *args, **kwargs):
+        if self._state.adding and self.image:
+            temp_image = self.image
+            self.image = None
+            super().save(*args, **kwargs)
+            self.image = temp_image
+
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
@@ -47,6 +61,7 @@ class Product(models.Model):
 
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="Номер телефона")
+    address = models.TextField(blank=True, null=True, verbose_name="Адрес")
 
 
 class Cart(models.Model):
@@ -118,3 +133,4 @@ class StoreReview(BaseReview):
 
     def __str__(self):
         return f"Отзыв на магазин № {self.id}"
+    
