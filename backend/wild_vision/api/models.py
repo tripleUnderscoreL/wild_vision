@@ -41,7 +41,8 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to=product_image_path, height_field=None, width_field=None, max_length=100, null=True)
-
+    features = models.JSONField(default=dict, blank=True)
+    
     def save(self, *args, **kwargs):
         if self._state.adding and self.image:
             temp_image = self.image

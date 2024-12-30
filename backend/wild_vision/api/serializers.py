@@ -1,6 +1,6 @@
 # flake8: noqa
 from rest_framework import serializers
-from .models import Product, Category, CustomUser, CartItem, ProductReview, BaseReview, StoreReview
+from .models import Product, Category, CustomUser, CartItem, ProductReview, BaseReview, StoreReview, Cart
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.db.models import Avg
@@ -36,7 +36,7 @@ class ProductSerializer(serializers.ModelSerializer):
     rating = serializers.SerializerMethodField()
     class Meta:
         model = Product
-        fields = ['id', 'category', 'name', 'description', 'price', 'image', 'reviews', 'rating']
+        fields = ['id', 'category', 'name', 'description', 'price', 'image', 'reviews', 'rating', 'features']
 
     def get_rating(self, obj):
         reviews = ProductReview.objects.filter(product=obj)
@@ -44,6 +44,12 @@ class ProductSerializer(serializers.ModelSerializer):
             avg_rating = reviews.aggregate(Avg('rating'))['rating__avg']
             return round(avg_rating, 2)
         return 0
+
+
+class SimpleProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'price', 'image', 'description']
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -68,12 +74,21 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class CartItemSerializer(serializers.ModelSerializer):
+    product = SimpleProductSerializer()
+
     class Meta:
         model = CartItem
-        fields = ['product', 'quantity']
+        fields = ['id', 'product', 'quantity']
 
     def validate_quantity(self, value):
         if value <= 0:
             raise serializers.ValidationError('количество должно быть больше одного')
         return value
-    
+
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'items']

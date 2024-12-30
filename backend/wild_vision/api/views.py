@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import generics, permissions
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .models import Category, Product, Cart, CartItem, ProductReview, StoreReview
-from .serializers import ProductSerializer, CartItemSerializer, ProductReviewSerializer, StoreReviewSerializer, CategorySerializer
+from .serializers import ProductSerializer, CartSerializer, ProductReviewSerializer, StoreReviewSerializer, CategorySerializer
 
 
 class ProductListView(generics.ListAPIView):
@@ -76,7 +76,7 @@ class CurrentCartView(APIView):
             cart, created = Cart.objects.get_or_create(session_key=session_key, user=None)
 
         cart_items = cart.items.all()
-        serializer = CartItemSerializer(cart_items, many=True)
+        serializer = CartSerializer(cart)
         total = sum(item.product.price * item.quantity for item in cart_items)
         return Response({
             "cart_id": cart.id,
