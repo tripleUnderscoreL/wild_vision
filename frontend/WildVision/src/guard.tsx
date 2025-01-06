@@ -16,7 +16,7 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ element }) => {
   if (isAuthenticated()) {
     return element;
   } else {
-    // Перенаправляем на страницу логина, если пользователь не авторизован
+    // Перенаправляем на страницу, если пользователь не авторизован
     alert("Вы не авторизованы!");
     return <Navigate to="/" replace />;
   }

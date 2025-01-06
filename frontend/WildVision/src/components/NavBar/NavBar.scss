@@ -5,6 +5,9 @@
   justify-content: space-between;
   gap: 5%;
   flex-wrap: wrap;
+  div{
+    min-width: 15%;
+  }
 }
 a{
   margin: auto;

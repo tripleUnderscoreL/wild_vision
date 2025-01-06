@@ -24,7 +24,7 @@ export const router = createBrowserRouter([
       {path:"/guarantees", element: <GuaranteesPage></GuaranteesPage>},
       {path:"/reviews", element: <ReviewsPage></ReviewsPage>},
       {path:"/payment", element: <PaymentPage></PaymentPage>},
-      {path:"/basket", element: <BasketPage></BasketPage>},
+      {path:"/basket", element: <ProtectedRoute element={<BasketPage/>}></ProtectedRoute>},
       { 
         path: "/profile", 
         element: <ProtectedRoute element={<ProfilePage />} /> // Используем guard

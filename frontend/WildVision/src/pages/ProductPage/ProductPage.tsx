@@ -6,7 +6,7 @@ import "./ProductPage.scss";
 import Footer from "../../components/Footer/Footer";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { fetchProduct } from "../../api";
+import { addCart, fetchProduct } from "../../api";
 import { Product } from "../../types";
 import { useParams } from "react-router-dom";
 
@@ -15,12 +15,13 @@ import { useParams } from "react-router-dom";
 const ProductPage = () => {
 
   const { id } = useParams<{ id: string }>();
+  console.log(id);
   const [product, setProduct] = useState<Product>([]);
   useEffect(() => {
       fetchProduct(id).then((data) => setProduct(data));
     }, []);
   const reviews = product.reviews === undefined ? [] : product.reviews;
-
+  console.log(reviews, )
   // const reviews = [
   //   {
   //     name: "Екатерина",
@@ -29,11 +30,9 @@ const ProductPage = () => {
   //     review: "Очень классный товар лайк подписка лайк",
   //     pros: "заебися",
   //     cons: "не заебись",
-  //     images: [
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //     ]
+  //     images: 
+  //       "../../src/assets/shopping-bag.png"
+      
   //   },
   //   {
   //     name: "Екатерина",
@@ -42,14 +41,9 @@ const ProductPage = () => {
   //     review: "Очень классный товар лайк подписка лайк",
   //     pros: "заебися",
   //     cons: "не заебись",
-  //     images: [
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //       "../../src/assets/shopping-bag.png",
-  //     ]
+  //     images: 
+  //       "../../src/assets/shopping-bag.png"
+      
   //   }
   // ];
     console.log(localStorage.getItem("authToken"));
@@ -61,11 +55,11 @@ const ProductPage = () => {
       <div className="product">
         <div className="product-main">
           <div className="product-front">
-            <div className="product-gallery">
+            {/* <div className="product-gallery">
               <img src="../../src/assets/shopping-bag.png" alt="" />
               <img src="../../src/assets/shopping-bag.png" alt="" />
               <img src="../../src/assets/shopping-bag.png" alt="" />
-            </div>
+            </div> */}
             <div className="product-img">
               <img src={product.image} alt="" />
             </div>
@@ -79,8 +73,8 @@ const ProductPage = () => {
               <div className="product-price">
                 <p>{product.price}</p>
                 <div className="product-save">
-                  <button>Купить</button>
-                  <button>В корзину</button>
+                  {/* <button>Купить</button> */}
+                  <button onClick={() => addCart({ product_id: id })}>В корзину</button>
                 </div>
               </div>
             </div>
@@ -94,22 +88,13 @@ const ProductPage = () => {
             <p>Характеристики</p>
             <section>
               <div>
-                <p>Увеличение</p>
-                <p>32х</p>
+                <p>Вес</p>
+                <p>6кг</p>
               </div>
               <div>
-                <p>Увеличение</p>
-                <p>32х</p>
+                <p>Цвет</p>
+                <p>универсальный</p>
               </div>
-              <div>
-                <p>Увеличение</p>
-                <p>32х</p>
-              </div>
-              <div>
-                <p>увеличение</p>
-                <p>32х</p>
-              </div>
-              <div></div>
               <div></div>
               <div></div>
               <div></div>
@@ -120,7 +105,7 @@ const ProductPage = () => {
 
           
 
-          {reviews.map(e => (<ReviewCard name={e.name} date={e.date} rating={e.rating} review={e.review} pros={e.pros} cons={e.cons} images={e.images}></ReviewCard>))}
+          {reviews.length !== 0 ? reviews.map(e => (<ReviewCard name={e.user} date={e.date} rating={e.rating} review={e.review_text} pros='все хорошо' cons='минусов не наблюдаю' images={e.image}></ReviewCard>)): null}
 
         </div>
       </div>

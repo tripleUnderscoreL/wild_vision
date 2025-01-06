@@ -21,8 +21,9 @@ const ReviewCard = ( review: Review) => {
         </section>
       </div>
       <div className="review-gallery">
-        {review.images.length > 0 ? review.images.map(e => (<img src={e}></img>)): null}
-        { review.images.length > 0  ? 
+        {/* {review.images {/*.length > 0 ? review.images.map(e => (<img src={e}></img>)): null*/}
+        <img src={review.images}></img>
+        { review.images !== null  ? 
           <button><img src="../../src/assets/right-arrow.png"></img></button>
           : null
         }

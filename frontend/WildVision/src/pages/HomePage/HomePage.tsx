@@ -9,10 +9,10 @@ import { Product } from "../../types";
 import { fetchProducts } from "../../api";
 
 const categories: Product[] = [
-  {image:"../../src/assets/shopping-bag.png", name: "Категория 1", price: "", description: "", category: ""},
-  {image:"../../src/assets/shopping-bag.png", name: "Категория 2", price: "", description: "", category: ""},
-  {image:"../../src/assets/shopping-bag.png", name: "Категория 3", price: "", description: "", category: ""},
-  {image:"../../src/assets/shopping-bag.png", name: "Категория 4", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Дроны", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "GPS-трекеры", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Снаряжение", price: "", description: "", category: ""},
+  {image:"../../src/assets/shopping-bag.png", name: "Фотоловушки", price: "", description: "", category: ""},
 ]
 
 

@@ -9,12 +9,13 @@ import { postUser } from '../../../api';
 const regSchema = z
   .object({
     username: z
-      .string()
-      .min(2, { message: 'Имя пользователя слишком короткое' })
-      .max(20, 'Имя пользователя слишком длинное')
+      .string(),
+      // .min(2, { message: 'Имя пользователя слишком короткое' })
+      // .max(20, 'Имя пользователя слишком длинное')
 
-      .transform((v) => v.toLowerCase().replace(/\s+/g, '_')),
-    password: z.string().min(6, 'Пароль слишком короткий'),
+      // .transform((v) => v.toLowerCase().replace(/\s+/g, '_')),
+    password: z.string(),
+    // .min(6, 'Пароль слишком короткий'),
     email: z.string().email('Некорректный email'),
 
     // terms: z.literal(true, {
@@ -26,10 +27,11 @@ const regSchema = z
 const authSchema = z
   .object({
     username: z
-      .string()
-      .min(2, { message: 'Имя пользователя слишком короткое' })
-      .transform((v) => v.toLowerCase().replace(/\s+/g, '_')),
-    password: z.string().min(6, 'Пароль слишком короткий'),
+      .string(),
+      // .min(2, { message: 'Имя пользователя слишком короткое' })
+      // .transform((v) => v.toLowerCase().replace(/\s+/g, '_')),
+    password: z.string()
+    // .min(6, 'Пароль слишком короткий'),
 
   })
 
@@ -67,9 +69,9 @@ export default function FormDialog() {
         handleClose()
       }
     
-      useEffect(() => { 
-        setFocus('username')
-      }, [])
+      // useEffect(() => { 
+      //   setFocus('username')
+      // }, [])
 
   const Sign = () => {
     if (signState) {
