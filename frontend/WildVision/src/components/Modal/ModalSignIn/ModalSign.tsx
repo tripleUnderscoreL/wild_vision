@@ -29,6 +29,7 @@ const authSchema = z
     username: z
       .string(),
       // .min(2, { message: 'Имя пользователя слишком короткое' })
+      /* eslint-disable @typescript-eslint/no-explicit-any */
       // .transform((v) => v.toLowerCase().replace(/\s+/g, '_')),
     password: z.string()
     // .min(6, 'Пароль слишком короткий'),
@@ -41,13 +42,13 @@ type AuthSchema = z.infer<typeof authSchema>
 
 export default function FormDialog() {
 
+  // const [ schema, setSchema ] = useState(regSchema);
   const [ schema, setSchema ] = useState(object);
-
   const {
         register,
         handleSubmit,
         reset,
-        setFocus,
+        // setFocus,
         formState: { isDirty, isSubmitting, errors },
       } = useForm<RegSchema>({ resolver: zodResolver(schema) })
 
@@ -180,7 +181,7 @@ export default function FormDialog() {
 
   const [signState, setSignState] = React.useState(false);
 
-  const onWrapperClick = (event) => {
+  const onWrapperClick = (event: any) => {
     if (event.target.className === 'modal-sign') {handleClose()}
   }
 

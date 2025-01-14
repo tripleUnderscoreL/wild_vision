@@ -8,14 +8,14 @@ import { getToken, getUser } from "../../api"
 import { User } from "../../types"
 import { Navigate } from "react-router-dom"
 
-const ProfilePage = (props: Props) => {
+const ProfilePage = () => {
 
   const [file, setFile] = useState(null);
   const [edit, setEdit] = useState<boolean>(false);
 
   function handleImgChange(e) {
     console.log(e.target.files);
-    document.getElementById("profile-img").classList.add('profile-photo-uploaded');
+    document.getElementById("profile-img")?.classList.add('profile-photo-uploaded');
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 

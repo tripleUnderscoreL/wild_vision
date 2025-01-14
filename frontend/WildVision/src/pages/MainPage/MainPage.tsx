@@ -8,12 +8,11 @@ import SmallProductSlider from "../../components/SmallProductSlider/SmallProduct
 import Logo from "../../components/Logo/Logo";
 import { Product } from "../../types";
 import { fetchProducts } from "../../api";
-interface Props {products: Product[]}
 
 
 
 
-const MainPage = (props: Props) => {
+const MainPage = () => {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {
     fetchProducts().then((data) => setProducts(data));

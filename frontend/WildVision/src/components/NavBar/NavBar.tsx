@@ -2,9 +2,8 @@ import React from "react";
 import './NavBar.scss';
 import ModalSign from "../Modal/ModalSignIn/ModalSign";
 import { getToken } from "../../api";
-interface Props {}
 
-const NavBar = (props: Props) => {
+const NavBar = () => {
   if (getToken() === null){
     return(
       <div className="navbar">

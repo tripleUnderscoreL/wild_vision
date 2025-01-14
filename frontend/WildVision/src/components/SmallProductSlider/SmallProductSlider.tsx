@@ -12,7 +12,7 @@ const SmallProductSlider = ({ products, name }: AppProps) => {
     <div className="discounts">
         <p className="discount-label">{name}</p>
         <section className="cards">
-          <button onClick={() => document.getElementById("scrollable-section").scrollBy({
+          <button onClick={() => document.getElementById("scrollable-section")?.scrollBy({
             top: 0,
             left: -312,
             behavior: 'smooth'
@@ -29,7 +29,7 @@ const SmallProductSlider = ({ products, name }: AppProps) => {
             ))}
 
           </section>
-          <button  onClick={() => (document.getElementById("scrollable-section").scrollBy({
+          <button  onClick={() => (document.getElementById("scrollable-section")?.scrollBy({
             top: 0,
             left: +312,
             behavior: 'smooth'

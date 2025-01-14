@@ -5,7 +5,6 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import "./ProductPage.scss";
 import Footer from "../../components/Footer/Footer";
 import ReviewCard from "../../components/ReviewCard/ReviewCard";
-import { SubmitHandler, useForm } from 'react-hook-form'
 import { addCart, fetchProduct } from "../../api";
 import { Product } from "../../types";
 import { useParams } from "react-router-dom";

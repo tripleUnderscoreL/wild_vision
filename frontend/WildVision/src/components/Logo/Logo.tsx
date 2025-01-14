@@ -1,8 +1,7 @@
 import React from "react";
 import './Logo.scss';
-interface Props {}
 
-const Logo = (props: Props) => {
+const Logo = () => {
   return(
     <a href="/" className="wv">
       <p className="wv">WildVision</p>

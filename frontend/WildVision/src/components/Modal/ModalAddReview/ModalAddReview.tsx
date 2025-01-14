@@ -14,7 +14,7 @@ import { postReview } from '../../../api';
 //     pros: z.string(),
 //     cons: z.string(),
 // })//готовая схема для валидации отзыва
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // type ReviewSchema = z.infer<typeof reviewSchema>
 
 export default function FormDialog() {
@@ -40,14 +40,14 @@ export default function FormDialog() {
 
   type FormSchema = z.infer<typeof formSchema>
 
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+  // const convertToBase64 = (file: File): Promise<string> => {
+  //   return new Promise((resolve, reject) => {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(file);
+  //     reader.onload = () => resolve(reader.result as string);
+  //     reader.onerror = (error) => reject(error);
+  //   });
+  // };
 
   const AddReview = () => {
 
@@ -97,11 +97,11 @@ export default function FormDialog() {
         )}
         <input type="text" placeholder='Опишите достоинства'
           id='pros'
-          aria-invalid={errors.pros ? 'true' : 'false'}
+          // aria-invalid={errors.pros ? 'true' : 'false'}
         />
         <input type="text" placeholder='Опишите недостатки'
           id='cons'
-          aria-invalid={errors.review ? 'true' : 'false'}
+          // aria-invalid={errors.review ? 'true' : 'false'}
         />
         <input type="text" placeholder='Выберите товар'
           {...register('num')}
@@ -132,7 +132,7 @@ export default function FormDialog() {
 
   const [open, setOpen] = React.useState(false);
 
-  const onWrapperClick = (event) => {
+  const onWrapperClick = (event: any) => {
     if (event.target.className === 'modal-sign') {handleClose()}
   }
 

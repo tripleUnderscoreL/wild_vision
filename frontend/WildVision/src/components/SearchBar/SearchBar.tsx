@@ -1,8 +1,7 @@
 import React from "react";
 import './SearchBar.scss';
-interface Props {}
 
-const SearchBar = (props: Props) => {
+const SearchBar = () => {
   return(
     <>
       <div className="search-bar">
