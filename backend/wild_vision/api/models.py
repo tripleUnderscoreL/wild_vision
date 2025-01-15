@@ -1,7 +1,8 @@
 # flake8: noqa 
-from django.db import models  # type: ignore
-from django.conf import settings  # type: ignore
-from django.contrib.auth.models import User, AbstractUser  # type: ignore
+from django.db import models
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 def product_image_path(instance, filename):
@@ -12,6 +13,9 @@ def category_image_path(instance, filename):
 
 def product_review_image_path(instance, filename):
     return f'product_{instance.product.id}/reviews/{filename}'
+
+def profile_pic_image_path(instance, filename):
+    return f'user_{instance.id}/profile_pics/{filename}'
 
 class Category(models.Model):
     name = models.CharField(max_length=255)
@@ -63,6 +67,7 @@ class Product(models.Model):
 class CustomUser(AbstractUser):
     phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name="Номер телефона")
     address = models.TextField(blank=True, null=True, verbose_name="Адрес")
+    profile_picture = models.ImageField(upload_to=profile_pic_image_path, null=True, blank=True, verbose_name="Фото профиля")
 
 
 class Cart(models.Model):
@@ -95,7 +100,10 @@ class CartItem(models.Model):
 class BaseReview(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     review_text = models.TextField()
-    rating = models.PositiveSmallIntegerField()
+    rating = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(5)],
+        verbose_name="Рейтинг"
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -105,15 +113,16 @@ class BaseReview(models.Model):
 class ProductReview(BaseReview):
     product = models.ForeignKey('Product', related_name='reviews', on_delete=models.CASCADE)
     image = models.ImageField(upload_to=product_review_image_path, null=True, blank=True)
+    pros = models.TextField(null=True, blank=True, verbose_name="Достоинства", default='-')
+    cons = models.TextField(null=True, blank=True, verbose_name="Недостатки", default='-')
 
     def save(self, *args, **kwargs):
-        if self._state.adding and self.image:
-            temp_image = self.image
-            self.image = None
-            super().save(*args, **kwargs)
-            self.image = temp_image
-
+        temp_image = self.image if self._state.adding else None
+        self.image = None if self._state.adding else self.image
         super().save(*args, **kwargs)
+        if temp_image:
+            self.image = temp_image
+            super().save(update_fields=['image'])
 
     class Meta:
         unique_together = ('product', 'user')

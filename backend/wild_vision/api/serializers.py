@@ -21,7 +21,13 @@ class BaseReviewSerializer(serializers.ModelSerializer):
 class ProductReviewSerializer(BaseReviewSerializer):
     class Meta(BaseReviewSerializer.Meta):
         model = ProductReview
-        fields = BaseReviewSerializer.Meta.fields + ['product', 'image']
+        fields = BaseReviewSerializer.Meta.fields + ['product', 'image', 'pros', 'cons']
+        extra_kwargs = {
+            'product': {'required': True},
+            'image': {'required': False},
+            'pros': {'required': False},
+            'cons': {'required': False},
+        }
 
 
 class StoreReviewSerializer(BaseReviewSerializer):
@@ -55,7 +61,7 @@ class SimpleProductSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = ['username', 'password', 'email', 'phone_number', 'first_name', 'last_name', 'address']
+        fields = ['username', 'password', 'email', 'phone_number', 'first_name', 'last_name', 'address', 'profile_picture']
         extra_kwargs = {'password': {'write_only': True}}
 
     def validate_password(self, value):
