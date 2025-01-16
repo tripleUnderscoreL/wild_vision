@@ -5,6 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.db.models import Avg
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -12,10 +13,19 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class BaseReviewSerializer(serializers.ModelSerializer):
+    user = serializers.SerializerMethodField()
+
     class Meta:
         model = BaseReview
         fields = ['id', 'user', 'review_text', 'rating', 'created_at']
         read_only_fields = ['user', 'created_at']
+
+    def get_user(self, obj):
+        return {
+            "id": obj.user.id,
+            "first_name": obj.user.first_name,
+            "last_name": obj.user.last_name,
+        }
 
 
 class ProductReviewSerializer(BaseReviewSerializer):
@@ -40,6 +50,7 @@ class ProductSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     reviews = ProductReviewSerializer(many=True, read_only=True)
     rating = serializers.SerializerMethodField()
+
     class Meta:
         model = Product
         fields = ['id', 'category', 'name', 'description', 'price', 'image', 'reviews', 'rating', 'features']
